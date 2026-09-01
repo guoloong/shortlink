@@ -62,7 +62,10 @@ class CPT {
             'supports'            => [ 'title' ],
             'capability_type'     => 'post',
             'capabilities'        => [
-                'create_posts' => 'manage_options',
+                // Editor-enabled fork: lowered from 'manage_options' to
+                // 'edit_posts' so Editors can create shortlinks via the WP
+                // REST CPT route and the wp-admin "Add New" UI.
+                'create_posts' => 'edit_posts',
             ],
             'map_meta_cap'        => true,
             'show_in_menu'        => true,

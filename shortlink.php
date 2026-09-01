@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name:       ShortLink WP URL Shortener
+ * Plugin Name:       ShortLink WP URL Shortener (Editor-enabled)
  * Plugin URI:        https://example.com/shortlink
- * Description:       A self-hosted URL shortener with click tracking, QR codes, REST API, and shortcode support.
- * Version:           1.0.0
+ * Description:       A self-hosted URL shortener with click tracking, QR codes, REST API, and shortcode support. Editor-enabled fork: Editors can manage shortlinks via REST and wp-admin.
+ * Version:           1.0.1-editor
  * Requires at least: 5.6
  * Requires PHP:      7.4
  * Author:            You
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'SHORTLINK_VERSION',    '1.0.0' );
+define( 'SHORTLINK_VERSION',    '1.0.1-editor' );
 define( 'SHORTLINK_PLUGIN_FILE', __FILE__ );
 define( 'SHORTLINK_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'SHORTLINK_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );

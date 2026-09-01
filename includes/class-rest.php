@@ -62,7 +62,10 @@ class REST {
     }
 
     public function can_manage(): bool {
-        return current_user_can( 'manage_options' );
+        // Editor-enabled fork: lowered from 'manage_options' (admin-only) to
+        // 'edit_posts' so Editor-role users can create/list/stats shortlinks
+        // via REST. Pushed on the editor-enabled-fork branch.
+        return current_user_can( 'edit_posts' );
     }
 
     public function resolve( \WP_REST_Request $req ) {
