@@ -4,7 +4,7 @@ Tags: url shortener, short link, redirect, qr code, links
 Requires at least: 5.6
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1-editor
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,8 +35,22 @@ Attributes: `id`, `slug`, `target`, `rel`, `class`.
 
 = REST API examples =
 * `GET  /wp-json/shortlink/v1/resolve/abc123` — public resolver.
-* `POST /wp-json/shortlink/v1/links` (admin only) — body: `{"target":"https://…","slug":"optional"}`.
-* `GET  /wp-json/shortlink/v1/links` (admin only) — paginated list.
+* `POST /wp-json/shortlink/v1/links` (Editor or admin) — body: `{"target":"https://…","slug":"optional"}`.
+* `GET  /wp-json/shortlink/v1/links` (Editor or admin) — paginated list.
+* `GET  /wp-json/shortlink/v1/links/<id>/stats` (Editor or admin) — per-link click stats.
+
+= Permissions =
+Starting with version `1.0.1-editor`, the REST API endpoints and the
+"Add New Short Link" admin page are available to any user with the
+`edit_posts` capability (Editor role and above), not only admins
+(`manage_options`).
+
+The **Settings** page and the global **Stats** page remain admin-only.
+
+This is a fork intended for sites that delegate shortlink management
+to Editors — for example, marketing teams who run their own short URLs
+without involving the site admin. If you need the original
+admin-only behavior, check out the `1.0.0` tag.
 
 = Settings =
 Settings → Short Links → Settings. Includes slug length, character set, prefix, redirect status, and tracking toggles.
@@ -51,5 +65,18 @@ Settings → Short Links → Settings. Includes slug length, character set, pref
 3. Visit **Short Links → Add New** to create your first short link.
 
 == Changelog ==
+
+= 1.0.1-editor =
+* Lowered the capability gate on the REST API (`POST/GET /shortlink/v1/links`,
+  `GET /shortlink/v1/links/{id}/stats`) and on the shortlink CPT
+  (`create_posts`) from `manage_options` to `edit_posts`, so Editor-role
+  users can create, list, and inspect shortlinks via REST and the
+  wp-admin "Add New" button.
+* The Settings page and the global Stats page remain admin-only.
+* Plugin name suffix changed to "(Editor-enabled)" so the fork is obvious
+  in the Plugins list. This is a backward-compatible change for any site
+  where the shortlink admin is the same person as the Editor — for sites
+  that want the original admin-only behavior, the `1.0.0` tag is unchanged.
+
 = 1.0.0 =
 * Initial release.
